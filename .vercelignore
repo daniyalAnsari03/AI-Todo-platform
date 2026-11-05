@@ -1,0 +1,17 @@
+frontend/
+.specify/
+docs/
+tests/
+node_modules/
+.venv/
+.git/
+.opencode/
+.env
+.env.local
+*.txt
+backend-*.txt
+render.yaml
+scripts/
+.pytest_cache/
+__pycache__/
+*.pyc

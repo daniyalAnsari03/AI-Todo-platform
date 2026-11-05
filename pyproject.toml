@@ -21,6 +21,7 @@ dependencies = [
 ]
 
 [project.scripts]
+app = "todo_app.api.app:app"
 todo-app = "todo_app:main"
 todo-app-api = "todo_app.api.app:main"
 
