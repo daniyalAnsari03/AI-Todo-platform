@@ -130,3 +130,35 @@ Breaking changes:
   - `PATCH /api/{user_id}/tasks/{task_id}/complete`
 - Tasks now include `title`, optional `description`, `created_at`, and `updated_at`.
 - The CLI gained `update` and `toggle` commands.
+
+## Deployment
+
+Prefer the `render.yaml` manifest at the repo root (backend) and Vercel with
+root directory `frontend`. Values are placeholders; never commit real secrets.
+
+Environment variable NAMES:
+
+- Vercel (frontend):
+  - `DATABASE_URL`
+  - `BETTER_AUTH_SECRET`
+  - `BETTER_AUTH_URL`
+  - `BACKEND_URL`
+  - `NEXT_PUBLIC_OPENAI_DOMAIN_KEY` (production-hosted ChatKit only)
+- Render (backend) — set in the Render dashboard, no values here:
+  - `DATABASE_URL`
+  - `BETTER_AUTH_URL`
+  - `OPENAI_API_KEY`
+  - `OPENAI_MODEL`
+  - `CORS_ORIGINS`
+  (Render also reads `PYTHON_VERSION` from `render.yaml`.)
+
+Deploy order:
+
+1. Deploy the backend on Render.
+2. Deploy the frontend on Vercel with the Render URL as `BACKEND_URL`.
+3. Set `BETTER_AUTH_URL` on Render to the Vercel URL (it drives the JWT
+   issuer/audience and the JWKS URL) and add the Vercel URL to `CORS_ORIGINS`
+   on Render, then redeploy the backend.
+
+Note: on the free tier the backend sleeps when idle, so the first request after
+inactivity is slow (cold start).

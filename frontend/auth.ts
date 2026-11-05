@@ -21,6 +21,10 @@ const db = drizzle(client, { schema });
 const baseURL = process.env.BETTER_AUTH_URL ?? "http://localhost:3000";
 const authOrigin = new URL(baseURL).origin;
 
+// Cookies must stay non-secure on local http (existing behavior) and become
+// secure when BETTER_AUTH_URL is an https origin (production deployments).
+const useSecureCookies = baseURL.startsWith("https://");
+
 export const auth = betterAuth({
   secret: process.env.BETTER_AUTH_SECRET,
   baseURL,
@@ -39,13 +43,13 @@ export const auth = betterAuth({
   },
   advanced: {
     cookiePrefix: "",
-    useSecureCookies: false,
+    useSecureCookies,
     cookies: {
       // Must match the cookie the FastAPI backend reads in
       // src/todo_app/auth.py. cookiePrefix alone cannot express this: Better
       // Auth treats it as a truthy-or-default string, so "" falls back to
       // "better-auth" and the cookie would be "better-auth.session_token".
-      session_token: { name: "session_token" },
+      session_token: { name: "session_token", secure: useSecureCookies },
     },
   },
   plugins: [

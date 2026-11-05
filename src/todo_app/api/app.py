@@ -16,10 +16,21 @@ from . import chatkit
 
 logging.basicConfig(level=logging.INFO, format='%(levelname)s %(name)s %(message)s', stream=sys.stderr, force=True)
 
+
+def _default_cors_origins() -> list[str]:
+    return ['http://localhost:3000', 'http://127.0.0.1:3000']
+
+
+def _cors_origins() -> list[str]:
+    raw = os.environ.get('CORS_ORIGINS', '')
+    origins = [part.strip() for part in raw.split(',') if part.strip()]
+    return origins or _default_cors_origins()
+
+
 app = FastAPI(title='Todo App API')
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=['http://localhost:3000', 'http://127.0.0.1:3000'],
+    allow_origins=_cors_origins(),
     allow_methods=['*'],
     allow_headers=['*'],
 )
