@@ -38,6 +38,23 @@ class TestVercelEntrypoint(unittest.TestCase):
             "todo-app-api script must remain unchanged",
         )
 
+    def test_vercelignore_does_not_exclude_frontend_folder(self):
+        lines = (ROOT / ".vercelignore").read_text(encoding="utf-8").splitlines()
+        banned = {"frontend", "frontend/", "/frontend", "/frontend/"}
+        entries = {
+            line.strip()
+            for line in lines
+            if line.strip() and not line.strip().startswith("#")
+        }
+        offending = entries & banned
+        self.assertEqual(
+            offending,
+            set(),
+            "root .vercelignore must not exclude the frontend folder: the frontend "
+            "Vercel project builds from Root Directory=frontend, so ignoring 'frontend/' "
+            "removes package.json at build time and causes [NEXT_NO_VERSION]",
+        )
+
     def test_app_is_fastapi_instance(self):
         self.assertIsInstance(app_module.app, fastapi.FastAPI)
 
