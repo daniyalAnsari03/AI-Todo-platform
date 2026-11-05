@@ -1,7 +1,0 @@
-Context: Project at D:\Todo_App, branch master, remote origin = https://github.com/daniyalAnsari03/AI-Todo-platform.git, HEAD 9c9de47. The user EXPLICITLY AUTHORIZES one commit and one normal push of the deployment-readiness changes. Do NOT print secret values. NEVER force push.
-
-1. `git status --short`. Stage ONLY: README.md, render.yaml, src/todo_app/api/app.py, tests/test_cors.py, frontend/next.config.js, frontend/auth.ts, frontend/src/lib/__tests__/auth-cookies.test.ts, frontend/src/lib/__tests__/next-config.test.ts, docs/fix.txt. Do NOT stage backend-count.txt, backend-report.txt, backend-tests.txt, frontend/.backup-pre-next16/ or anything else.
-2. SAFETY GATE on staged diff: ABORT and report file path + line + pattern name only if it contains a .env or .env.local file, a non-placeholder postgres:// or postgresql:// host, an sk- string of 20+ chars, a non-empty BETTER_AUTH_SECRET= or OPENAI_API_KEY= value, or -----BEGIN.
-3. If the gate passes, commit with message: "feat: deployment config for Vercel + Render (BACKEND_URL, CORS_ORIGINS, https cookies)"
-4. `git push origin master`. If rejected or auth fails, STOP and report the exact error. Do not alter history.
-5. Report: staged files list, commit hash, push result, `git status --short`.
