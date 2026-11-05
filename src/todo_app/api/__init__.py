@@ -1,0 +1,1 @@
+"""FastAPI web API package for the full-stack todo application."""

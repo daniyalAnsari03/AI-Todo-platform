@@ -1,0 +1,30 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+.opencode/commands/
+
+# Secrets / env files
+.env
+.env.*
+!.env.example
+frontend/.env
+frontend/.env.*
+!frontend/.env.example
+.env.local
+frontend/.env.local
+
+# Dependencies / build artifacts
+node_modules/
+frontend/node_modules/
+frontend/.next/
+
+# Python
+.venv/
+*.pyc

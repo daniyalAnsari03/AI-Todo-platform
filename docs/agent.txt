@@ -1,0 +1,21 @@
+Read .specify/memory/constitution.md and the repository structure.
+
+Create a root-level AGENTS.md for this Todo project.
+
+Requirements:
+- AGENTS.md must be the project-wide source of truth for coding-agent behavior.
+- Follow the adopted constitution v1.0.0 exactly.
+- Document the mandatory Spec-Kit lifecycle:
+  Specify → Plan → Tasks → Implement.
+- Require approval gates before moving between stages.
+- Require test-first development.
+- Require Python 3.13+, uv, and src/todo_app.
+- State that OpenCode is the implementation coding agent.
+- Keep the rules concise and actionable.
+- Do not invent technologies, architecture, features, or requirements not established by the project specification/constitution.
+- Do not modify source code or implement any feature.
+- Do not modify .specify/memory/constitution.md.
+- Do not create CLAUDE.md yet.
+- Do not commit or push anything.
+
+After creating AGENTS.md, show me the complete file content and a concise verification summary.
